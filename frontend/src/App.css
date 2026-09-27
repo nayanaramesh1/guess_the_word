@@ -1,17 +1,47 @@
-.app {
-  min-height: 100vh;
+.game {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.game h1 {
+  margin-bottom: 30px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.app h1 {
-  margin: 0;
-  font-size: 32px;
+.guess-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
 }
 
-.subtitle {
-  margin-top: 10px;
+.guess-input input {
+  width: 200px;
+  padding: 10px;
   font-size: 16px;
+}
+
+.guess-input button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
