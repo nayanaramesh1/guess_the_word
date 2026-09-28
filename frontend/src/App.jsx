@@ -2,15 +2,52 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const targetWord = "APPLE";
   const [guesses, setGuesses] = useState([]);
+  const [statuses, setStatuses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState("");
+
+  const evaluateGuess = (guess, target) => {
+  const result = Array(5).fill("absent");
+  const targetLetters = target.split("");
+  const guessLetters = guess.split("");
+
+  // First pass: correct position
+  for (let i = 0; i < 5; i++) {
+    if (guessLetters[i] === targetLetters[i]) {
+      result[i] = "correct";
+      targetLetters[i] = null;
+      guessLetters[i] = null;
+    }
+  }
+
+  // Second pass: correct letter, wrong position
+  for (let i = 0; i < 5; i++) {
+    if (guessLetters[i] === null) {
+      continue;
+    }
+
+    const targetIndex = targetLetters.indexOf(guessLetters[i]);
+
+    if (targetIndex !== -1) {
+      result[i] = "present";
+      targetLetters[targetIndex] = null;
+    }
+  }
+
+    return result;
+  };
 
   const handleGuess = () => {
     if (currentGuess.length !== 5) {
       return;
     }
 
-    setGuesses([...guesses, currentGuess.toUpperCase()]);
+    const guess = currentGuess.toUpperCase();
+    const result = evaluateGuess(guess, targetWord);
+
+    setGuesses([...guesses, guess]);
+    setStatuses([...statuses, result]);
     setCurrentGuess("");
   };
 
@@ -26,8 +63,11 @@ function App() {
           const letter = guesses[row]?.[column] || "";
 
           return (
-            <div className="tile" key={index}>
-              {letter}
+            <div
+              className={`tile ${statuses[row]?.[column] || ""}`}
+              key={index}
+            >
+            {letter}
             </div>
           );
         })}
@@ -41,7 +81,7 @@ function App() {
           onChange={(event) => setCurrentGuess(event.target.value)}
           placeholder="Enter your guess"
         />
-
+        
         <button onClick={handleGuess}>Guess</button>
       </div>
     </div>

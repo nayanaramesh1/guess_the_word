@@ -45,3 +45,21 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.tile.correct {
+  background-color: #37972e;
+  color: white;
+  border-color: #44b03a;
+}
+
+.tile.present {
+  background-color: #fff154;
+  color: white;
+  border-color: #fff154;
+}
+
+.tile.absent {
+  background-color: #a6ada8;
+  color: white;
+  border-color: #a6ada8;
+}
