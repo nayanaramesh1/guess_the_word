@@ -1,42 +1,12 @@
 import { useState } from "react";
 import "./App.css";
+import { evaluateGuess } from "./utils/evaluateGuess";
 
 function App() {
   const targetWord = "APPLE";
   const [guesses, setGuesses] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState("");
-
-  const evaluateGuess = (guess, target) => {
-  const result = Array(5).fill("absent");
-  const targetLetters = target.split("");
-  const guessLetters = guess.split("");
-
-  // First pass: correct position
-  for (let i = 0; i < 5; i++) {
-    if (guessLetters[i] === targetLetters[i]) {
-      result[i] = "correct";
-      targetLetters[i] = null;
-      guessLetters[i] = null;
-    }
-  }
-
-  // Second pass: correct letter, wrong position
-  for (let i = 0; i < 5; i++) {
-    if (guessLetters[i] === null) {
-      continue;
-    }
-
-    const targetIndex = targetLetters.indexOf(guessLetters[i]);
-
-    if (targetIndex !== -1) {
-      result[i] = "present";
-      targetLetters[targetIndex] = null;
-    }
-  }
-
-    return result;
-  };
 
   const handleGuess = () => {
     if (currentGuess.length !== 5) {
