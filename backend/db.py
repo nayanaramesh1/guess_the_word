@@ -1,7 +1,7 @@
 import os
 
 import pymysql
-from .env import load_dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
 
