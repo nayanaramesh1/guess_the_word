@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from db import get_db_connection
 
 game_bp = Blueprint("game", __name__)
@@ -6,10 +6,13 @@ game_bp = Blueprint("game", __name__)
 
 @game_bp.route("/api/game/start", methods=["POST"])
 def start_game():
+    data = request.get_json()
+    user_id = data.get("user_id")
     connection = get_db_connection()
     cursor = connection.cursor()
 
-    user_id = 5
+    if not user_id:
+        return jsonify({"message": "user_id is required"}), 400
 
     cursor.execute(
         """
