@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import AdminDashboard from "./AdminDashboard.jsx";
 
 function App() {
   const [gameId, setGameId] = useState(null);
@@ -69,10 +70,16 @@ function App() {
     }
 
     setUser(data);
-    setLoginMessage("");
 
+    if (data.role === "ADMIN") {
+      setLoginMessage("");
+        return;
+    }
+
+    setLoginMessage("");
     startGame(data.user_id);
-  } catch (error) {
+    }
+    catch (error) {
     console.error("Login error:", error);
     setLoginMessage("Unable to connect to server");
   }
@@ -199,6 +206,10 @@ const handleGuess = async () => {
     console.error("Error starting new game:", error);
   }
 };
+
+if (user && user.role === "ADMIN") {
+  return <AdminDashboard user={user} />;
+}
 
 return (
   <div className="game">

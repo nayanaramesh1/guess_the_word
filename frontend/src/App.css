@@ -182,3 +182,86 @@
   font-size: 14px;
   text-decoration: underline;
 }
+
+.admin-dashboard {
+  min-height: 100vh;
+  padding: 40px;
+  background: #f4f6f8;
+}
+
+.admin-header {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.admin-header p {
+  margin: 8px 0 0;
+  color: #666;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-actions button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.admin-actions button:hover {
+  background: #444;
+}
+
+.admin-message {
+  color: #d33;
+  margin-bottom: 20px;
+}
+
+.report-section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.report-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.report-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-section th,
+.report-section td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.report-section th {
+  background: #f4f6f8;
+  font-weight: bold;
+}
+
+.report-section tr:hover {
+  background: #fafafa;
+}
