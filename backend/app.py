@@ -1,8 +1,10 @@
 from flask import Flask
 from game_routes import game_bp
+from guess_routes import guess_bp
 
 app = Flask(__name__)
 app.register_blueprint(game_bp)
+app.register_blueprint(guess_bp)
 
 
 @app.route("/api/health", methods=["GET"])
