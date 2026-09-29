@@ -11,6 +11,39 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  const register = async () => {
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:5000/api/auth/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setLoginMessage(data.message);
+      return;
+    }
+
+    setLoginMessage("Registration successful. Please login.");
+    setIsRegistering(false);
+    setPassword("");
+  } catch (error) {
+    console.error(error);
+    setLoginMessage("Unable to connect to server");
+  }
+};
 
   const login = async () => {
   try {
@@ -176,8 +209,10 @@ return (
       <h1>Guess the Word</h1>
 
       <p className="login-subtitle">
-        Sign in to start playing
-      </p>
+  {isRegistering
+    ? "Create an account to start playing"
+    : "Sign in to start playing"}
+</p>
 
       <div className="login-form">
         <label>Username</label>
@@ -198,13 +233,27 @@ return (
           onChange={(event) => setPassword(event.target.value)}
         />
 
-        <button className="login-button" onClick={login}>
-          Login
+        <button
+        className="login-button"
+        onClick={isRegistering ? register : login}
+        >
+        {isRegistering ? "Register" : "Login"}
         </button>
 
         {loginMessage && (
           <p className="login-message">{loginMessage}</p>
         )}
+        <button
+  className="register-link"
+  onClick={() => {
+    setIsRegistering(!isRegistering);
+    setLoginMessage("");
+  }}
+>
+  {isRegistering
+    ? "Already have an account? Login"
+    : "Don't have an account? Register"}
+</button>
       </div>
     </div>
   </div>
@@ -214,7 +263,6 @@ return (
         <h1>Guess the Word</h1>
 
         <p>Welcome {user.username}</p>
-        <p>Game ID: {gameId}</p>
 
         <div className="board">
           {Array.from({ length: 25 }).map((_, index) => {

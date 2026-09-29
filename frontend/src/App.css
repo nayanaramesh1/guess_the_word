@@ -173,3 +173,12 @@
   color: #d33;
   font-size: 14px;
 }
+
+.register-link {
+  margin-top: 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+}
